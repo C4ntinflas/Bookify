@@ -17,7 +17,11 @@ module.exports = {
         type: Sequelize.TEXT,
         allowNull: false
       },
-      location: {
+      rating: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
+      reviews: {
         type: Sequelize.STRING,
         allowNull: false
       },
@@ -26,7 +30,11 @@ module.exports = {
         allowNull: false
       },
       availability: {
-        type: Sequelize.BOOLEAN,
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
+      total_quantity: {
+        type: Sequelize.INTEGER,
         allowNull: false
       }
     });
