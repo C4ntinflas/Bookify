@@ -1,20 +1,20 @@
-const stores = require('express').Router()
+const book_stores = require('express').Router()
 const db = require('../models')
-const { Store } = db
+const { BookStore } = db
 
-stores.get('/', async (req, res) => {
+book_stores.get('/', async (req, res) => {
     try{
-        const foundStores = await Store.findAll()
-        res.status(200).json(foundStores)
+        const foundStores = await BookStore.findAll()
+        res.status(200).json({foundStores})
     } catch (error) {
         res.status(500).json(error)
     }
 })
 
 //SHOW
-stores.get('/:id', async (req, res) => {
+book_stores.get('/:id', async (req, res) => {
     try {
-        const foundStores = await Store.findOne({
+        const foundStores = await BookStore.findOne({
             where: { store_id: req.params.id }
         })
         res.status(200).json(foundStores)
@@ -24,9 +24,9 @@ stores.get('/:id', async (req, res) => {
 })
 
 //CREATE
-stores.post('/', async (req, res) => {
+book_stores.post('/', async (req, res) => {
     try {
-        const newStore = await Store.create(req.body)
+        const newStore = await BookStore.create(req.body)
         res.status(200).json({
             message: 'Successfully inserted a new store',
             data: newStore
@@ -37,9 +37,9 @@ stores.post('/', async (req, res) => {
 })
 
 //UPDATE
-stores.put('/:id', async (req, res) => {
+book_stores.put('/:id', async (req, res) => {
     try {
-        const updatedStores = await Store.update(req.body, {
+        const updatedStores = await BookStore.update(req.body, {
             where: {
                 store_id: req.params.id
             }
@@ -53,9 +53,9 @@ stores.put('/:id', async (req, res) => {
 })
 
 //DELETE
-stores.delete('/:id', async (req, res) => {
+book_stores.delete('/:id', async (req, res) => {
     try {
-        const deletedStores = await Store.destroy({
+        const deletedStores = await BookStore.destroy({
             where: { 
                 store_id: req.params.id
             }
@@ -68,4 +68,4 @@ stores.delete('/:id', async (req, res) => {
     }
 })
 
-module.exports = stores
+module.exports = book_stores
