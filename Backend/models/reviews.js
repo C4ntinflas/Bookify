@@ -50,5 +50,3 @@ module.exports = (sequelize, DataTypes) => {
   });
   return Reviews;
 };
-
-module.exports = Reviews;

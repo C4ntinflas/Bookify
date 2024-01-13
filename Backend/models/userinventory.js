@@ -54,5 +54,3 @@ module.exports = (sequelize, DataTypes) => {
   });
   return UserInventory;
 };
-
-module.exports = UserInventory;
