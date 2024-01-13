@@ -17,11 +17,7 @@ module.exports = {
         type: Sequelize.TEXT,
         allowNull: false
       },
-      rating: {
-        type: Sequelize.INTEGER,
-        allowNull: false
-      },
-      reviews: {
+      location: {
         type: Sequelize.STRING,
         allowNull: false
       },
@@ -29,7 +25,11 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      availability: {
+      store_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
+      quantity: {
         type: Sequelize.INTEGER,
         allowNull: false
       },

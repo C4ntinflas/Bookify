@@ -17,10 +17,6 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      checked_books: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
       home_store: {
         type: Sequelize.STRING,
         allowNull: false
