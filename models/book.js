@@ -9,8 +9,15 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
+    static associate({ BookStore, Review}) {
       // define association here
+      Book.belongsTo(BookStore, {
+        foreignKey: 'store_id'
+      });
+
+      Book.hasMany(Review, {
+        foreignKey: 'book_id'
+      });
     }
   }
   Book.init({
@@ -29,16 +36,27 @@ module.exports = (sequelize, DataTypes) => {
     },
     location: {
         type: DataTypes.STRING,
-        allowNull: false
     },
     description: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    availability: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false
-  }
+    total_quantity: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    quantity: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    store_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Bookstore',
+        key: 'store_id'
+      },
+    },
  },
   {
     sequelize,
@@ -48,3 +66,5 @@ module.exports = (sequelize, DataTypes) => {
   })
   return Book;
 };
+
+module.exports = Book;

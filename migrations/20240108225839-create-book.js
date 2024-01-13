@@ -25,8 +25,16 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      availability: {
-        type: Sequelize.BOOLEAN,
+      store_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
+      quantity: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
+      total_quantity: {
+        type: Sequelize.INTEGER,
         allowNull: false
       }
     });
