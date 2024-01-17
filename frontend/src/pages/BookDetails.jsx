@@ -4,7 +4,7 @@ import Spinner from '../components/spinner'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 
-const BookDetails = () => {
+function BookDetails() {
   const [book, setBook] = useState({})
   const [loading, setLoading] = useState(false)
   const { id } = useParams()

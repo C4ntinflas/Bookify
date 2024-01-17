@@ -6,8 +6,10 @@ import BookResults from './pages/BookResults'
 import EditBooks from './pages/EditBooks'
 import DeleteBooks from './pages/DeleteBooks'
 import BookDetails from './pages/BookDetails'
+import Stores from './pages/Stores'
+import StorePage from './pages/StorePage'
 
-const App = () => {
+function App() {
   return (
     <Routes>
       <Route path='/' element={<Home />} />
@@ -16,6 +18,8 @@ const App = () => {
       <Route path='/books/details/:id' element={<BookDetails />} />
       <Route path='/books/edit/:id' element={<EditBooks />} />
       <Route path='/books/delete/:id' element={<DeleteBooks />} />
+      <Route path='/stores' element={<Stores />} />
+      <Route path='/stores/page' element={<StorePage />} />
     </Routes>
   )
 }
