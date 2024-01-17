@@ -19,12 +19,15 @@ app.get('/', (req, res) => {
   });
 });
 
-// CONTROLLERS
-const storesController = require('./Controllers/store_controller');
-app.use('/stores', storesController);
+//CONTROLLERS
+const storesController = require('./Controllers/store_controller')
+app.use('/stores', storesController) 
 
-const booksController = require('./Controllers/book');
-app.use('/books', booksController);
+const booksController = require('./Controllers/book')
+app.use('/books', booksController)
+
+const usersController = require('./Controllers/user_controller')
+app.use('/users', usersController)
 
 const usersController = require('./Controllers/user_controller')
 app.use('/users', usersController)
