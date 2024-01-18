@@ -29,8 +29,7 @@ app.use('/books', booksController)
 const usersController = require('./Controllers/user_controller')
 app.use('/users', usersController)
 
-const usersController = require('./Controllers/user_controller')
-app.use('/users', usersController)
+
 
 // Backend Endpoint GET Request
 const backendEndpoint = 'http://localhost:5173/';
