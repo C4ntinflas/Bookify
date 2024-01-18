@@ -26,29 +26,45 @@ books.post('/', async (req, res) => {
 books.get('/new', (req, res) => {
   res.render('books/new');
 });
-
 // Route to view details of a specific book
-books.get('/:id', async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
-    const book = await Book.findByPk(req.params.id); 
-    res.render('books/show', { book });
-  } catch (err) {
-    console.error('Error:', err);
-    res.render('error404');
+    const book = await Book.findByPk(req.params.id);
+
+    if (!book) {
+      return res.status(404).json({ message: "Book not found." });
+    }
+
+    // Return the book data as JSON
+    res.json({ book });
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ message: "Internal Server Error" });
   }
 });
 
 // Route to update details of a specific book
-books.put('/:id', async (req, res) => {
+router.put("/:id", async (req, res) => {
+  const bookId = req.params.id;
+
   try {
-    await Book.update(req.body, { where: { book_id: req.params.id } }); 
-    res.redirect(`/books/${req.params.id}`);
-  } catch (err) {
-    console.error('Error:', err);
-    res.render('error404');
+    const [updatedCount] = await Book.update(req.body, {
+      where: { book_id: bookId },
+    });
+
+    if (updatedCount === 0) {
+      return res.status(404).json({ message: "Book not found." });
+    }
+
+    const updatedBook = await Book.findByPk(bookId);
+
+    // Return the updated book data as JSON
+    res.json({ message: "Book updated successfully", book: updatedBook });
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ message: "Internal Server Error" });
   }
 });
-
 // Route to delete a specific book
 books.delete('/:id', async (req, res) => {
   try {
@@ -71,7 +87,7 @@ books.get('/:id/edit', async (req, res) => {
   }
 });
 
-// Route for searching books
+/* // Route for searching books (**OLD ROUTE, STORED FOR POTENTIAL USAGE**)
 books.get('/search', async (req, res) => {
   const searchTerm = req.query.q;
 
@@ -97,5 +113,6 @@ books.get('/search', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+ */
 
 module.exports = books;

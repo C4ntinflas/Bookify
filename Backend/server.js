@@ -1,32 +1,31 @@
 // DEPENDENCIES
-const express = require('express')
-const app = express()
-const { Sequelize } = require('sequelize')
-
-
+const express = require("express");
+const app = express();
+const { Sequelize } = require("sequelize");
 
 // CONFIGURATION / MIDDLEWARE
-require('dotenv').config()
-app.use(express.json())
-app.use(express.urlencoded({ extended: false }))
+require("dotenv").config();
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 // ROOT
-app.get('/', (req, res) => {
-    res.status(200).json({
-        message: 'Welcome to the Bookify App'
-    })
-})
+app.get("/", (req, res) => {
+  res.status(200).json({
+    message: "Welcome to the Bookify App",
+  });
+});
 
 //CONTROLLERS
-const storesController = require('./Controllers/store_controller')
-app.use('/stores', storesController) 
+const storesController = require("./Controllers/store_controller");
+app.use("/stores", storesController);
 
-const booksController = require('./Controllers/book')
-app.use('/books', booksController)
+const booksController = require("./Controllers/book");
+app.use("/books", booksController);
 
-
+const searchController = require("./Controllers/search");
+app.use("/api", searchController);
 
 // LISTEN
 app.listen(process.env.PORT, () => {
-    console.log(`Server live on port: ${process.env.PORT}`)
-})
+  console.log(`Server live on port: ${process.env.PORT}`);
+});

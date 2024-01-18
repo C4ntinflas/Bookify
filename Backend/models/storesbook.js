@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class StoresBook extends Model {
     /**
@@ -9,52 +7,50 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({ BookStore, Book}) {
-      // define association here
-      StoresBook.belongsTo(BookStore, { 
-        foreignKey: 'store_id' 
+    static associate({ BookStore, Book }) {
+      StoresBook.belongsTo(BookStore, {
+        foreignKey: "store_id",
       });
 
       StoresBook.belongsTo(Book, {
-        foreignKey: 'book_id'
-      });
-
-      BookStore.hasMany(StoresBook, {
-        foreignKey: 'store_id'
-      });
-
-      Book.hasMany(StoresBook, {
-        foreignKey: 'book_id'
+        foreignKey: "book_id",
       });
     }
   }
-  StoresBook.init({
-    quantity: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue: 0,
-    },
-    store_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'BookStore',
-        key: 'store_id'
+  StoresBook.init(
+    {
+      quantity: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+      },
+      store_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: "BookStore",
+          key: "store_id",
+        },
+      },
+      book_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+          model: "Book", // Corrected reference to the Book model
+          key: "book_id",
+        },
+      },
+      quantity: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
       },
     },
-    book_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'Bookstore',
-        key: 'store_id'
-      }
+    {
+      sequelize,
+      modelName: "StoresBook",
+      tableName: "stores_books",
+      timestamps: false,
     }
-  }, {
-    sequelize,
-    modelName: 'StoresBook',
-    tableName: 'stores_book',
-    timestamps: false,
-  });
+  );
   return StoresBook;
 };
