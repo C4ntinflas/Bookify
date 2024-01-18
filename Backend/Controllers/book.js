@@ -1,47 +1,47 @@
-const books = require('express').Router()
-const db = require('../models')
-const { Book } = db
+const { Op } = require('sequelize');
+const express = require('express');
+const books = express.Router();
+const db = require('../models');
+const { Book } = db;
 
-// Route to display a list of books
 books.get('/', async (req, res) => {
   try {
-    const foundBooks = await Book.findAll(); 
-    res.status(200).json({foundBooks});
+    const foundBooks = await Book.findAll();
+    res.status(200).json({ foundBooks });
   } catch (err) {
-    res.status(500).json(error);
+    res.status(500).json({ error: err.message });
   }
 });
 
-// Route to handle form submission and create a new book
 books.post('/', async (req, res) => {
   try {
-    const newBook = await Book.create(req.body); 
+    console.log('Received Book Data:', req.body);
+
+    const newBook = await Book.create(req.body);
     res.redirect('/books');
   } catch (err) {
-    res.status(500).json(err)
+    console.error('Error creating book:', err);
+    res.status(500).json({ error: err.message });
   }
 });
 
-// Route to display the form for adding a new book
 books.get('/new', (req, res) => {
   res.render('books/new');
 });
 
-// Route to view details of a specific book
 books.get('/:id', async (req, res) => {
   try {
-    const book = await Book.findByPk(req.params.id); 
-    res.render('books/show', { book });
+    const book = await Book.findByPk(req.params.id);
+    res.json(book);
   } catch (err) {
     console.error('Error:', err);
     res.render('error404');
   }
 });
 
-// Route to update details of a specific book
 books.put('/:id', async (req, res) => {
   try {
-    await Book.update(req.body, { where: { book_id: req.params.id } }); 
+    await Book.update(req.body, { where: { book_id: req.params.id } });
     res.redirect(`/books/${req.params.id}`);
   } catch (err) {
     console.error('Error:', err);
@@ -49,7 +49,6 @@ books.put('/:id', async (req, res) => {
   }
 });
 
-// Route to delete a specific book
 books.delete('/:id', async (req, res) => {
   try {
     await Book.destroy({ where: { book_id: req.params.id } });
@@ -60,7 +59,6 @@ books.delete('/:id', async (req, res) => {
   }
 });
 
-// Route to display the form for editing a specific book
 books.get('/:id/edit', async (req, res) => {
   try {
     const book = await Book.findByPk(req.params.id);
@@ -71,7 +69,6 @@ books.get('/:id/edit', async (req, res) => {
   }
 });
 
-// Route for searching books
 books.get('/search', async (req, res) => {
   const searchTerm = req.query.q;
 
@@ -80,14 +77,18 @@ books.get('/search', async (req, res) => {
   }
 
   try {
-    const url = `https://openlibrary.org/search.json?q=${encodeURIComponent(searchTerm)}`;
-    const response = await fetch(url);
-    const result = await response.json();
+    const foundBooks = await Book.findAll({
+      where: {
+        title: {
+          [Op.like]: `%${searchTerm}%`
+        }
+      }
+    });
 
-    if (result.docs && result.docs.length > 0) {
+    if (foundBooks.length > 0) {
       console.log(`Search Term: ${searchTerm}`);
-      console.log('Search Results:', result.docs);
-      res.json(result.docs);
+      console.log('Search Results:', foundBooks);
+      res.json(foundBooks);
     } else {
       console.log(`No results found for search term: ${searchTerm}`);
       res.json({ message: 'Not Found' });
@@ -97,5 +98,6 @@ books.get('/search', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
 
 module.exports = books;
