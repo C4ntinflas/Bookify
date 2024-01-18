@@ -1,49 +1,44 @@
+const { Op } = require('sequelize');
 const express = require('express');
-const router = express.Router(); 
-const Book = require('./models/book');
+const books = express.Router();
+const db = require('../models');
+const { Book } = db;
 
-// Route to display a list of books
-router.get('/', async (req, res) => {
+books.get('/', async (req, res) => {
   try {
-    const books = await Book.findAll(); 
-    res.render('books/index', { books });
+    const foundBooks = await Book.findAll();
+    res.status(200).json({ foundBooks });
   } catch (err) {
-    console.error('Error:', err);
-    res.render('error404');
+    res.status(500).json({ error: err.message });
   }
 });
 
-// Route to handle form submission and create a new book
-router.post('/', async (req, res) => {
+books.post('/', async (req, res) => {
   try {
-    const newBook = await Book.create(req.body); 
+    const newBook = await Book.create(req.body);
     res.redirect('/books');
   } catch (err) {
-    console.error('Error:', err);
-    res.render('error404');
+    res.status(500).json({ error: err.message });
   }
 });
 
-// Route to display the form for adding a new book
-router.get('/new', (req, res) => {
+books.get('/new', (req, res) => {
   res.render('books/new');
 });
 
-// Route to view details of a specific book
-router.get('/:id', async (req, res) => {
+books.get('/:id', async (req, res) => {
   try {
-    const book = await Book.findByPk(req.params.id); 
-    res.render('books/show', { book });
+    const book = await Book.findByPk(req.params.id);
+    res.json(book);
   } catch (err) {
     console.error('Error:', err);
     res.render('error404');
   }
 });
 
-// Route to update details of a specific book
-router.put('/:id', async (req, res) => {
+books.put('/:id', async (req, res) => {
   try {
-    await Book.update(req.body, { where: { book_id: req.params.id } }); 
+    await Book.update(req.body, { where: { book_id: req.params.id } });
     res.redirect(`/books/${req.params.id}`);
   } catch (err) {
     console.error('Error:', err);
@@ -51,8 +46,7 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// Route to delete a specific book
-router.delete('/:id', async (req, res) => {
+books.delete('/:id', async (req, res) => {
   try {
     await Book.destroy({ where: { book_id: req.params.id } });
     res.redirect('/books');
@@ -62,8 +56,7 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
-// Route to display the form for editing a specific book
-router.get('/:id/edit', async (req, res) => {
+books.get('/:id/edit', async (req, res) => {
   try {
     const book = await Book.findByPk(req.params.id);
     res.render('books/edit', { book });
@@ -73,8 +66,7 @@ router.get('/:id/edit', async (req, res) => {
   }
 });
 
-// Route for searching books
-router.get('/search', async (req, res) => {
+books.get('/search', async (req, res) => {
   const searchTerm = req.query.q;
 
   if (!searchTerm) {
@@ -82,14 +74,18 @@ router.get('/search', async (req, res) => {
   }
 
   try {
-    const url = `https://openlibrary.org/search.json?q=${encodeURIComponent(searchTerm)}`;
-    const response = await fetch(url);
-    const result = await response.json();
+    const foundBooks = await Book.findAll({
+      where: {
+        title: {
+          [Op.like]: `%${searchTerm}%`
+        }
+      }
+    });
 
-    if (result.docs && result.docs.length > 0) {
+    if (foundBooks.length > 0) {
       console.log(`Search Term: ${searchTerm}`);
-      console.log('Search Results:', result.docs);
-      res.json(result.docs);
+      console.log('Search Results:', foundBooks);
+      res.json(foundBooks);
     } else {
       console.log(`No results found for search term: ${searchTerm}`);
       res.json({ message: 'Not Found' });
@@ -100,4 +96,5 @@ router.get('/search', async (req, res) => {
   }
 });
 
-module.exports = router;
+
+module.exports = books;

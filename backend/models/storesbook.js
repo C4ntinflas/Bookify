@@ -58,5 +58,3 @@ module.exports = (sequelize, DataTypes) => {
   });
   return StoresBook;
 };
-
-module.exports = StoresBook;
