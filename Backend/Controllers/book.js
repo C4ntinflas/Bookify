@@ -15,9 +15,12 @@ books.get('/', async (req, res) => {
 
 books.post('/', async (req, res) => {
   try {
+    console.log('Received Book Data:', req.body);
+
     const newBook = await Book.create(req.body);
     res.redirect('/books');
   } catch (err) {
+    console.error('Error creating book:', err);
     res.status(500).json({ error: err.message });
   }
 });
