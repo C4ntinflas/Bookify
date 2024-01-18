@@ -43,4 +43,4 @@ function App() {
     <Navbar />
     <Component />
   </>
-}
+)}
