@@ -27,7 +27,11 @@ module.exports = {
       },
       store_id: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        references: {
+          model: 'book_stores', // Name of the referenced table
+          key: 'store_id', // Primary key of the referenced table
+        },
+        allowNull: false,
       },
       quantity: {
         type: Sequelize.INTEGER,

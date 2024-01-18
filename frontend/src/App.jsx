@@ -1,5 +1,5 @@
 import React from 'react'
-import {Routes,Route}from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import CreateBooks from './pages/CreateBooks'
 import BookResults from './pages/BookResults'
@@ -13,7 +13,7 @@ function App() {
   return (
     <Routes>
       <Route path='/' element={<Home />} />
-      <Route path='/books/results' element={<BookResults/>} />
+      <Route path='/books/results' element={<BookResults />} />
       <Route path='/books/create' element={<CreateBooks />} />
       <Route path='/books/details/:id' element={<BookDetails />} />
       <Route path='/books/edit/:id' element={<EditBooks />} />

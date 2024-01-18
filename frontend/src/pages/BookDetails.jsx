@@ -12,17 +12,17 @@ function BookDetails() {
   useEffect(() => {
     setLoading(true)
     axios
-    .get(`http://localhost:3001/books/${id}`)
-    .then((response) => {
-      console.log('Data from server:', response.data);
-      setBook(response.data)
-      setLoading(false)
-    })
-    .catch((error) => {
-      console.log('Error fetching data:', error);
-      setLoading(false)
-    })
-  }, [])
+      .get(`http://localhost:3001/books/${id}`)
+      .then((response) => {
+        console.log('Data from server:', response.data)
+        setBook(response.data)
+        setLoading(false)
+      })
+      .catch((error) => {
+        console.log('Error fetching data:', error)
+        setLoading(false)
+      })
+  }, [id])
 
   return (
     <div className='p-4'>
@@ -43,7 +43,7 @@ function BookDetails() {
           <div className='my-4'>
             <span className='text-xl mr-4 text-fgray-500'>Genre</span>
             <span>{book.genre}</span>
-          </div>  
+          </div>
           <div className='my-4'>
             <span className='text-xl mr-4 text-fgray-500'>Location</span>
             <span>{book.location}</span>
@@ -52,8 +52,20 @@ function BookDetails() {
             <span className='text-xl mr-4 text-fgray-500'>Description</span>
             <span>{book.description}</span>
           </div>
+          <div className='my-4'>
+            <span className='text-xl mr-4 text-fgray-500'>Store ID</span>
+            <span>{book.store_id}</span>
+          </div>
+          <div className='my-4'>
+            <span className='text-xl mr-4 text-fgray-500'>Quantity</span>
+            <span>{book.quantity}</span>
+          </div>
+          <div className='my-4'>
+            <span className='text-xl mr-4 text-fgray-500'>Total Quantity</span>
+            <span>{book.total_quantity}</span>
+          </div>
         </div>
-      )} 
+      )}
     </div>
   )
 }
