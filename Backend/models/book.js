@@ -9,13 +9,21 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({ BookStore, Reviews}) {
+    static associate({ BookStore, Reviews, StoresBook, UserInventory}) {
       // define association here
       Book.belongsTo(BookStore, {
         foreignKey: 'store_id'
       });
 
       Book.hasMany(Reviews, {
+        foreignKey: 'book_id'
+      });
+
+      Book.hasMany(StoresBook, {
+        foreignKey: 'book_id'
+      });
+    
+      Book.hasMany(UserInventory, {
         foreignKey: 'book_id'
       });
     }
@@ -53,7 +61,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: 'Bookstore',
+        model: 'BookStore',
         key: 'store_id'
       },
     },
@@ -66,3 +74,4 @@ module.exports = (sequelize, DataTypes) => {
   })
   return Book;
 };
+

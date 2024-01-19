@@ -4,7 +4,7 @@ import Home from './pages/Home'
 import CreateBooks from './pages/CreateBooks'
 import BookResults from './pages/BookResults'
 import EditBooks from './pages/EditBooks'
-import DeleteBooks from './pages/DeleteBooks'
+import DeleteBook from './pages/DeleteBook'
 import BookDetails from './pages/BookDetails'
 import Stores from './pages/Stores'
 
@@ -16,7 +16,7 @@ const App = () => {
       <Route path='/books/create' element={<CreateBooks />} />
       <Route path='/books/details/:id' element={<BookDetails />} />
       <Route path='/books/edit/:id' element={<EditBooks />} />
-      <Route path='/books/delete/:id' element={<DeleteBooks />} />
+      <Route path='/books/delete/:id' element={<DeleteBook />} />
       <Route path='/stores' element={<Stores />} />
     </Routes>
   )

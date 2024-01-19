@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import BackButton from '../components/BackButton';
-import Spinner from '../components/Spinner';
+import Spinner from '../components/spinner';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -28,6 +28,7 @@ const EditBooks = () => {
       axios.get(`http://localhost:3001/books/${id}`)
         .then(response => {
           const book = response.data;
+          console.log('Book Data:', book);
           setTitle(book.title);
           setGenre(book.genre);
           setLocation(book.location);
@@ -82,7 +83,7 @@ const EditBooks = () => {
   return (
     <div className='p-4'>
       <BackButton />
-      <h1 className='text-3x1 my-4'>Create Book</h1>
+      <h1 className='text-3xl my-4'>Create Book</h1>
       {loading ? <Spinner /> : ''}
       <div className='flex flex-col border-2 border-sky-400 rounded-x1 w-[600px] p-4 mx-auto'>
         <div className='m-4'>
@@ -124,8 +125,8 @@ const EditBooks = () => {
         <div className='m-4'>
           <label className='text-xl mr-4 text-grey-500'>Store</label>
           <select
-            value={store_name}
-            onChange={(e) => setStore(e.target.value)}
+            value={storeName}
+            onChange={(e) => setStoreName(e.target.value)}
             className='border-2 border-grey-500 px-4 py-2 w-full'
           >
             <option value=''>Select a store</option>
@@ -154,7 +155,7 @@ const EditBooks = () => {
             className='border-2 border-grey-500 px-4 py-2 w-full'
           />
         </div>
-        <button className='p-2 bg-sky-300 m-8' onClick={handleSaveBook}>
+        <button className='p-2 bg-sky-300 m-8' onClick={handleEditBook}>
           Save
         </button>
       </div>
