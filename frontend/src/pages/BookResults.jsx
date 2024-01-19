@@ -28,54 +28,42 @@ const BookResults = () => {
 
   return (
     <div className='p-4'>
-      <div className='flex justify-between items-center'>
-        <h1 className='text-3xl my-8'>Books List</h1>
+      <div className='flex justify-between items-center mb-8'>
+        <h1 className='text-3xl'>Books List</h1>
         <Link to='/books/create'>
-          <MdOutlineAddBox className='text-sky-800 text-4x1' />
+          <MdOutlineAddBox className='text-sky-800 text-4xl' />
         </Link>
       </div>
       {loading ? (
         <Spinner />
       ) : (
-        <table className='w-full border-separate border-spacing-2'>
+        <table className='w-full table-auto'>
           <thead>
-            <tr>
-              <th className='border border-slate-600 rounded-md'>No</th>
-              <th className='border border-slate-600 rounded-md'>Title</th>
-              <th className='border border-slate-600 rounded-md max-m:hidden'>
-                Genre
-              </th>
-              <th className='border border-slate-600 rounded-md max-m:hidden'>
-                Location
-              </th>
-              <th className='border border-slate-600 rounded-md'>Operations</th>
+            <tr className='bg-sky-800 text-white'>
+              <th className='py-2 px-4'>No</th>
+              <th className='py-2 px-4'>Title</th>
+              <th className='py-2 px-4 hidden md:table-cell'>Genre</th>
+              <th className='py-2 px-4 hidden md:table-cell'>Location</th>
+              <th className='py-2 px-4'>Operations</th>
             </tr>
           </thead>
           <tbody>
             {books.map((book, index) => (
-              <tr key={book.book_id} className='h-8'>
-                <td className='border border-slate-700 rounded-md text-center'>
-                  {index + 1}
-                </td>
-                <td className='border border-slate-700 rounded-md text-center'>
-                  {book.title}
-                </td>
-                <td className='border border-slate-700 rounded-md text-center max-md:hidden'>
-                  {book.genre}
-                </td>
-                <td className='border border-slate-700 rounded-md text-center max-md:hidden'>
-                  {book.location}
-                </td>
-                <td className='border border-slate-700 rounded-md text-center'>
+              <tr key={book.book_id} className='text-center'>
+                <td className='border py-2 px-4'>{index + 1}</td>
+                <td className='border py-2 px-4'>{book.title}</td>
+                <td className='border py-2 px-4 hidden md:table-cell'>{book.genre}</td>
+                <td className='border py-2 px-4 hidden md:table-cell'>{book.location}</td>
+                <td className='border py-2 px-4'>
                   <div className='flex justify-center gap-x-4'>
                     <Link to={`/books/details/${book.book_id}`}>
-                      <BsInfoCircle className='text-2x1 text-green-800' />
+                      <BsInfoCircle className='text-2xl text-green-800' />
                     </Link>
                     <Link to={`/books/edit/${book.book_id}`}>
-                      <AiOutlineEdit className='text-2x1 text-yellow-600' />
+                      <AiOutlineEdit className='text-2xl text-yellow-600' />
                     </Link>
                     <Link to={`/books/delete/${book.book_id}`}>
-                      <MdOutlineDelete className='text-2x1 text-red-600' />
+                      <MdOutlineDelete className='text-2xl text-red-600' />
                     </Link>
                   </div>
                 </td>

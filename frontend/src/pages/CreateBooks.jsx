@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import BackButton from '../components/BackButton';
-import Spinner from '../components/Spinner';
+import Spinner from '../components/spinner';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -10,8 +10,8 @@ const CreateBooks = () => {
   const [location, setLocation] = useState('');
   const [description, setDescription] = useState('');
   const [store_name, setStore] = useState('');
-  const [quantity, setQuantity] = useState(''); 
-  const [totalQuantity, setTotalQuantity] = useState(''); 
+  const [quantity, setQuantity] = useState('');
+  const [totalQuantity, setTotalQuantity] = useState('');
   const [loading, setLoading] = useState(false);
   const [stores, setStores] = useState([
     { store_id: 1, name: 'Book Haven' },
@@ -33,8 +33,8 @@ const CreateBooks = () => {
           setLocation(book.location);
           setDescription(book.description);
           setStore(book.store_name);
-          setQuantity(book.quantity); 
-          setTotalQuantity(book.total_quantity); 
+          setQuantity(book.quantity);
+          setTotalQuantity(book.total_quantity);
         })
         .catch(error => {
           console.error('Error fetching book data:', error);
@@ -46,19 +46,19 @@ const CreateBooks = () => {
     event.preventDefault();
     setLoading(true);
 
-     // Find the selected store
-  const selectedStore = stores.find((store) => store.name === store_name);
+    // Find the selected store
+    const selectedStore = stores.find((store) => store.name === store_name);
 
-  if (!selectedStore) {
-    console.error('Selected store not found');
-    setLoading(false);
-    return;
-  }
-  
+    if (!selectedStore) {
+      console.error('Selected store not found');
+      setLoading(false);
+      return;
+    }
+
     axios.get(`http://localhost:3001/stores`)
       .then(response => {
         const store = response.data;
-  
+
         const bookData = {
           title,
           genre,
@@ -68,13 +68,13 @@ const CreateBooks = () => {
           quantity,
           total_quantity: totalQuantity
         };
-  
+
         console.log('bookData:', bookData);
-  
+
         const request = id
           ? axios.put(`http://localhost:3001/books/${id}`, bookData)
           : axios.post('http://localhost:3001/books', bookData);
-  
+
         request
           .then(response => {
             console.log('Book saved successfully:', response.data);
@@ -91,11 +91,11 @@ const CreateBooks = () => {
         setLoading(false);
       });
   };
-  
+
   return (
     <div className='p-4'>
       <BackButton />
-      <h1 className='text-3x1 my-4'>Create Book</h1>
+      <h1 className='text-3xl'>Create Book</h1>
       {loading ? <Spinner /> : ''}
       <div className='flex flex-col border-2 border-sky-400 rounded-x1 w-[600px] p-4 mx-auto'>
         <div className='m-4'>
