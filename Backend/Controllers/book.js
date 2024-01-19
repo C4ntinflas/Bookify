@@ -28,8 +28,9 @@ books.post("/", async (req, res) => {
 books.get("/new", (req, res) => {
   res.render("books/new");
 });
+
 // Route to view details of a specific book
-router.get("/:id", async (req, res) => {
+books.get("/:id", async (req, res) => {
   try {
     const book = await Book.findByPk(req.params.id);
 
@@ -46,7 +47,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // Route to update details of a specific book
-router.put("/:id", async (req, res) => {
+books.put("/:id", async (req, res) => {
   const bookId = req.params.id;
 
   try {
