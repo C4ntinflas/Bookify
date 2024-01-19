@@ -3,6 +3,7 @@ const db = require('../models')
 const { BookStore } = db
 const { Op } = require('sequelize');
 
+
 //INDEX
 book_stores.get('/', async (req, res) => {
     try{
@@ -14,7 +15,7 @@ book_stores.get('/', async (req, res) => {
     }
 })
 
-//SHOW
+/////SHOW//////
 book_stores.get('/:id', async (req, res) => {
     try {
         const foundStores = await BookStore.findOne({
@@ -26,6 +27,7 @@ book_stores.get('/:id', async (req, res) => {
         res.status(500).json(error)
     }
 })
+
 
 //CREATE
 book_stores.post('/', async (req, res) => {

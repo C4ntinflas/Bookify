@@ -11,7 +11,7 @@ function Stores() {
     const [ storesData, setStoresData ] = useState([])
     const [ loading, setLoading ] = useState(false)
     
-
+    const storeId = 
 
     useEffect(() => {
         setLoading(true)
@@ -31,24 +31,26 @@ function Stores() {
     return (
         <div className='p-4'>
             <BackButton />
-            <h1 className='text-3xl my-4'>Book Stores</h1>
+            <h1 className='text-3xl my-4 text-center'>Book Stores</h1>
             {loading ? (
                 <Spinner />
             ) : (
                 <div>
                     {storesData.map((store, index) => (
-                        <Link to='page' state={{ from: store }}>
-                            <div key={index} className='flex flex-col border-2 border-sky-400 rounded-xl w-fit p-4 my-4'>
-                                <div className='my-4'>
-                                    <span className='text-xl mr-4 text-fgray-500'>Store Name</span>
-                                    <span>{store.store_name}</span>
-                                </div>
+                        <div key={index} className='flex flex-col border-2 border-sky-400 rounded-xl w-fit p-4 my-4'>
+                            <Link to={`${store.store_id}`}  state={{ from: store }}>
                                 <div>
-                                    <span className='text-xl mr-4 text-fgray-500'>Store Address</span>
-                                    <span>{store.address}</span>
+                                    <div className='my-4'>
+                                        <span className='text-xl mr-4 text-fgray-500'>Store Name</span>
+                                        <span>{store.store_name}</span>
+                                    </div>
+                                    <div>
+                                        <span className='text-xl mr-4 text-fgray-500'>Store Address</span>
+                                        <span>{store.address}</span>
+                                    </div>
                                 </div>
-                            </div>
-                        </Link>
+                            </Link>
+                        </div>
                     ))}
                 </div>  
             )}

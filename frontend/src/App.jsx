@@ -8,6 +8,7 @@ import DeleteBooks from './pages/DeleteBooks'
 import BookDetails from './pages/BookDetails'
 import Stores from './pages/Stores'
 import StorePage from './pages/StorePage'
+import PurchasePage from './pages/PurchasePage'
 
 function App() {
   return (
@@ -19,7 +20,8 @@ function App() {
       <Route path='/books/edit/:id' element={<EditBooks />} />
       <Route path='/books/delete/:id' element={<DeleteBooks />} />
       <Route path='/stores' element={<Stores />} />
-      <Route path='/stores/page' element={<StorePage />} />
+      <Route path='/stores/:id' element={<StorePage />} />
+      <Route path='/stores/:id/purchase' element={<PurchasePage />} />
     </Routes>
   )
 }
