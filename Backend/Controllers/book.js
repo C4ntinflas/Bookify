@@ -13,10 +13,25 @@ books.get("/", async (req, res) => {
   }
 });
 
+//STORE INVENTORY
+books.get('/store/:id', async (req, res) => {
+  try {
+    const foundBooks = await Book.findAll({
+      where: {
+        store_id: req.params.id
+      }
+    })
+    console.log(foundBooks)
+    res.status(200).json(foundBooks)
+  } catch (error) {
+    res.status(500).json(error)
+    //console.log(req.params.id)
+  }
+})
+
 books.post("/", async (req, res) => {
   try {
     console.log("Received Book Data:", req.body);
-
     const newBook = await Book.create(req.body);
     res.redirect("/books");
   } catch (err) {

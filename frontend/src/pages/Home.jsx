@@ -15,7 +15,7 @@ const Home = () => {
       <Navbar />
       <div
         style={{
-          backgroundImage: "url('/Bookifybg.jpg')", // Assuming Bookifybg.jpg is in the public folder
+          backgroundImage: "url('/Bookifybg.jpg')",
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           minHeight: '100vh',

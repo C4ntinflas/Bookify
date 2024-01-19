@@ -33,6 +33,8 @@ const authRoutes = require('./Controllers/auth');
 app.use('/admin', authRoutes);
 
 
+
+
 // Backend Endpoint GET Request
 const backendEndpoint = "http://localhost:5173/";
 
@@ -55,7 +57,6 @@ app.get("/fetchData", cors(), (req, res) => {
       });
     });
 });
-
 
 // LISTEN
 app.listen(process.env.PORT, () => {
