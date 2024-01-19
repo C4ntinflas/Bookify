@@ -8,7 +8,7 @@ import DeleteBooks from './pages/DeleteBooks'
 import BookDetails from './pages/BookDetails'
 import Stores from './pages/Stores'
 import StoreLogIn from './pages/StoreLogIn'
-import ErrorBoundary from './ErrorBoundary';
+import SearchBar from './components/SearchBar'
 
 
 const App = () => {

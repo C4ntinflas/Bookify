@@ -15,7 +15,6 @@ const SearchBar = () => {
     } catch (error) {
       console.error('Error:', error);
       console.log('Response:', error.response); // Log the response for debugging
-      // Handle error (e.g., display an error message to the user)
     }
   };
 
@@ -36,7 +35,6 @@ const SearchBar = () => {
       <p><strong>Book ID:</strong> {searchResult.book.book_id}</p>
       <p><strong>Title:</strong> {searchResult.book.title}</p>
       <p><strong>Genre:</strong> {searchResult.book.genre}</p>
-      {/* Add more details based on your data structure */}
       
       <h4>Store Quantities</h4>
       {searchResult.store_quantities.map((store, index) => (
