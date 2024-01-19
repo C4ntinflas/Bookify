@@ -28,6 +28,7 @@ books.post("/", async (req, res) => {
 books.get("/new", (req, res) => {
   res.render("books/new");
 });
+
 // Route to view details of a specific book
 books.get("/:id", async (req, res) => {
   try {

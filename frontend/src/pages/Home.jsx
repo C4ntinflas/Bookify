@@ -1,9 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
+import SearchBar from '../components/SearchBar'
+import BookDetails from './BookDetails';
 
 const Home = () => {
-  return (
-    <div>Home</div>
-  )
-}
+    const [searchResult, setSearchResult] = useState(null);
 
-export default Home
+    const handleSearch = (result) => {
+      setSearchResult(result);
+    };
+
+
+return (
+  <div>
+  <h1> Book Search </h1>
+  <SearchBar onSearch={handleSearch} />
+  {searchResult && <BookDetails book={searchResult} />}
+  </div>
+)
+};
+
+export default Home;
