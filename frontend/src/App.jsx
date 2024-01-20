@@ -22,10 +22,10 @@ const App = () => {
       <Route path='/books/edit/:id' element={<EditBooks />} />
       <Route path='/books/delete/:id' element={<DeleteBook />} />
       <Route path='/stores' element={<Stores />} />
-      <Route path='/store/login' element={<StoreLogIn />} />
+      <Route path='/login' element={<StoreLogIn />} />
       <Route path='/stores/:id' element={<StorePage />} />
       <Route path='/stores/:id/:id' element={<PurchasePage />} />
-      <Route path='/store/:id/inventory' element={<StoreInvent />} />
+      <Route path='login/store/:id/inventory' element={<StoreInvent />} />
     </Routes>
   );
 };

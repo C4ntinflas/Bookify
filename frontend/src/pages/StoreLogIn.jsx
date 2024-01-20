@@ -1,7 +1,41 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom'
 
 const StoreLogIn = () => {
+  const [storesData, setStoresData] = useState([])
+  const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
+
+
+  useEffect(() => {
+    setLoading(true);
+    axios
+      .get(`http://localhost:3001/stores`)
+      .then((response) => {
+        console.log('Data from server:', response.data.foundStores);
+        setStoresData(response.data.foundStores);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log('Error fetching data', error);
+        setLoading(false);
+      });
+  }, []);
+
+  function verification() {
+    for (let i = 0; i < storesData.length; i++) {
+      if (credentials.admin_user === storesData[i].admin_user) {
+        if (credentials.password === storesData[i].password) {
+          const storeId = storesData[i].store_id;
+          navigate(`store/${storeId}/inventory`, { state: storesData[i] });
+          return;
+        }
+      }
+    }
+    console.log('Invalid credentials');
+  }
+
   const [credentials, setCredentials] = useState({
     admin_user: "",
     password: "",
@@ -15,38 +49,9 @@ const StoreLogIn = () => {
     }));
   };
 
-  const handleLogin = async () => {
-    try {
-      const response = await axios.post(
-        "http://localhost:3001/admin/login",
-        credentials,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      // Check the response for success
-      if (response.data.success) {
-        // Redirect to the Book CRUD page (replace '/book-crud' with your desired route)
-        window.location.href = "#";
-      } else {
-        // Show an alert or update state to inform the user about the failed login
-        alert("Incorrect username or password. Please try again.");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-
-      // Handle specific errors if needed
-      if (error.response) {
-        console.error("Response data:", error.response.data);
-      }
-
-      // Show an alert or update state to inform the user about the error
-      alert("An error occurred. Please try again.");
-    }
-  };
+  function handleLogin() {
+    verification()
+  }
 
   return (
     <div className="flex items-center justify-center h-screen bg-[#D2CBB1] text-black">
