@@ -29,6 +29,18 @@ books.get('/store/:id', async (req, res) => {
   }
 })
 
+//UPDATE STORE INVENTORY
+books.put('/book/:id', async (req, res) => {
+  const bookId = req.params.id
+  try {
+    const updateQuantity = await Book.update(req.body, {
+      where: {book_id: bookId}
+    })
+  } catch (error) {
+    res.status(500).json(error)
+  }
+})
+
 books.post("/", async (req, res) => {
   try {
     console.log("Received Book Data:", req.body);

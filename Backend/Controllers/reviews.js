@@ -5,7 +5,11 @@ const { Reviews } = db
 
 reviews.get('/', async (req, res) => {
     try{
-        const foundStores = await BookStore.findAll()
+        const foundreviews = await Reviews.findAll({
+            where: {
+                
+            }
+        })
         console.log(foundStores)
         res.status(200).json({ foundStores })
     } catch (error) {

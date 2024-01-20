@@ -21,7 +21,7 @@ function App() {
       <Route path='/books/delete/:id' element={<DeleteBooks />} />
       <Route path='/stores' element={<Stores />} />
       <Route path='/stores/:id' element={<StorePage />} />
-      <Route path='/stores/:id/purchase' element={<PurchasePage />} />
+      <Route path='/stores/:id/:id' element={<PurchasePage />} />
     </Routes>
   )
 }

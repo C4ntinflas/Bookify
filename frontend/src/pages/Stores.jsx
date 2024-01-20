@@ -11,8 +11,6 @@ function Stores() {
     const [ storesData, setStoresData ] = useState([])
     const [ loading, setLoading ] = useState(false)
     
-    const storeId = 
-
     useEffect(() => {
         setLoading(true)
         axios

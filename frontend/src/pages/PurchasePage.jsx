@@ -1,6 +1,23 @@
 import React from "react"
 import { useLocation } from "react-router-dom";
+import { Link , useNavigate} from "react-router-dom";
+import axios from 'axios'
 
+
+
+let newImg = null
+let book = null
+
+
+function setImg(array, book){
+    for(let i = 0; i < array.length; i++){
+        if(array[i].name === book.title){
+            newImg = array[i].img
+        }
+        else{
+        }
+    }
+}
 
 const bookImg = [{
     name: 'The Great Gatsby',
@@ -34,43 +51,50 @@ const bookImg = [{
     img: 'https://m.media-amazon.com/images/I/81zE42gT3xL._AC_UF1000,1000_QL80_.jpg'
 }]
 
-let newImg = null
 
-function setImg(array, book){
-    for(let i = 0; i < array.length; i++){
-        if(array[i].name === book.title){
-            newImg = array[i].img
-        }
-        else{
-            console.log('something went wrong')
-        }
-    }
-}
 
 function PurchasePage() {
     const location = useLocation()
     const { from } = location.state
+    const navigate = useNavigate()
 
-    const book = from
-
+    book = from
+    console.log(book)
     setImg(bookImg, book)
-    
+
+    function handlePurchase(event){
+        event.preventDefault()
+        book.quantity = book.quantity - 1
+        
+        axios.put(`http://localhost:3001/books/book/${book.book_id}`, book)
+            .then(response => {
+                console.log('Quantity was successfully updated', response.data);
+                
+                
+            })
+            .catch(error => {
+                console.error('Error updating quantity:', error);
+                // Handle error and provide user feedback if necessary
+            }),
+        navigate('/stores')
+            
+    }
+
     return (
         
         <div>
             <div className='container'>
-                {console.log(book)}
                 <div className='bookContainer'>
                     <div className='bookImg'>
                         <img src={newImg} alt={'Book cover for'+ from.title}/>
                     </div>
                     <div className='bookDetails'>
-                        <h1>{from.title}</h1>
+                        <h1 className="bookTitle">{from.title}</h1>
                         <hr></hr>
-                        <h3>{from.genre}</h3>
-                        <h3>Discription</h3>
-                        <p>{from.description}</p>
-                        <button className="button">Buy Book</button>
+                        <h3 className="bookGenre">{from.genre}</h3>
+                        <h3 className="bookGenre">Discription</h3>
+                        <p className="description">{from.description}</p>
+                        <button className="button" onClick={handlePurchase}>Buy Book</button>
                     </div>
                 </div>
                 <div>
