@@ -35,9 +35,7 @@ const BookDetails = () => {
           {renderDetail('Genre', book.genre)}
           {renderDetail('Description', book.description)}
           {renderDetail('Location', book.location)}
-          {renderDetail('Store', book.store_)}
           {renderDetail('Quantity', book.quantity)}
-          {renderDetail('Total Quantity', book.total_quantity)}
         </div>
       )}
     </div>

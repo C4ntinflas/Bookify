@@ -9,12 +9,12 @@ import { BsArrowLeft } from 'react-icons/bs';
 let newImg = null
 let myStore = null
 
-function setImg(array, store){
-    for(let i = 0; i < array.length; i++){
-        if(array[i].name === store){
+function setImg(array, store) {
+    for (let i = 0; i < array.length; i++) {
+        if (array[i].name === store) {
             return array[i].img
         }
-        else{
+        else {
         }
     }
 }
@@ -33,12 +33,12 @@ const storeImg = [{
 
 
 function Stores() {
-    const [ storesData, setStoresData ] = useState([])
-    const [ loading, setLoading ] = useState(false)
+    const [storesData, setStoresData] = useState([])
+    const [loading, setLoading] = useState(false)
     console.log(storesData)
 
     setImg(storeImg, myStore)
-    
+
     useEffect(() => {
         setLoading(true);
         axios
@@ -56,14 +56,14 @@ function Stores() {
 
     const BackButton = () => {
         history.back()
-      };
+    };
 
     return (
         <div>
             <Navbar />
             <div className='p-6 flex items-center'>
-                <button type="button" onClick={BackButton} 
-                className='bg-[#36311F] text-white px-4 py-2 rounded-md flex items-center hover:bg-[#36311F] transition-all duration-300 text-lg text-2xl mr-2'
+                <button type="button" onClick={BackButton}
+                    className='bg-[#36311F] text-white px-4 py-2 rounded-md flex items-center hover:bg-[#36311F] transition-all duration-300 text-lg text-2xl mr-2'
                 ><BsArrowLeft className='text-2xl mr-2' />Back</button>
             </div>
             <div className='p-4 text-black min-h-screen'>
@@ -78,7 +78,7 @@ function Stores() {
                                     <div>
                                         <div>
                                             {/* {myStore = store.store_name} */}
-                                            <img className='storeImg' src={setImg(storeImg, (store.store_name) )} alt='image of the store'/>
+                                            <img className='storeImg' src={setImg(storeImg, (store.store_name))} alt='image of the store' />
                                         </div>
                                         <div className='bg-[#49E9C1]'>
                                             <div className=''>

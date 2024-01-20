@@ -4,7 +4,7 @@ import Navbar from '../components/NavBar';
 
 const BookResults = () => {
     const { state } = useLocation();
-    console.log('State:', state); // Log state to the console for debugging
+    console.log('State:', state);
     const searchResult = state && state.searchResult;
 
     return (

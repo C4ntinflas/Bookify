@@ -5,13 +5,13 @@
 
 
 
-img{
+img {
     margin: auto;
     margin-top: 8%;
     height: 550px;
 }
 
-.bookContainer{
+.bookContainer {
     height: 95%;
     width: 95%;
     margin: auto;
@@ -19,21 +19,23 @@ img{
     background-color: lightgray;
 }
 
-.bookDetails{
+.bookDetails {
     height: 100%;
     width: 50%;
 }
-.bookGenre{
+
+.bookGenre {
     text-align: center;
     margin-top: 10%;
     font-size: 20px;
 }
 
-.bookImg{
+.bookImg {
     height: 100%;
     width: 50%;
 }
-.bookTitle{
+
+.bookTitle {
     text-align: center;
     margin-top: 10%;
     font-size: 35px;
@@ -47,26 +49,28 @@ img{
     font-size: 16px;
     margin: 10% 0 0 40%;
     border-radius: 12px;
-  }
+}
 
-.containerMain{
+.containerMain {
     width: 90vw;
     height: 90vh;
     margin: auto;
     margin-top: 5vh;
 }
-.description{
+
+.description {
     text-align: center;
     margin-top: 5%;
-    font-size: 20px;  
+    font-size: 20px;
 }
-.price{
+
+.price {
     text-align: center;
     margin-top: 10%;
     font-size: 20px;
 }
-.storeImg{
+
+.storeImg {
     height: 300px;
     width: 300px;
 }
-
