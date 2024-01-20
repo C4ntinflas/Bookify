@@ -39,8 +39,7 @@ npm start
 ```
 ## Contributors
 
-- C4ntinflas ([GitHub Profile] (https://github.com/C4ntinflas)), 
-- ring8812 ([GitHub Profile] (https://github.com/ring8812)), 
+- C4ntinflas ([GitHub Profile] (https://github.com/C4ntinflas)),  
 - serafindani ([GitHub Profile] (https://github.com/serafindani)), 
 - BenG2256 ([GitHub Profile] (https://github.com/BenG2256)), 
 - ntowe89 ([GitHub Profile] (https://github.com/ntowe89))
