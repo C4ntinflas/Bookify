@@ -5,8 +5,8 @@ import BackButton from '../components/BackButton';
 import { Link } from "react-router-dom";
 
 function Stores() {
-    const [storesData, setStoresData] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [storesData, setStoresData] = useState([])
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         setLoading(true);
