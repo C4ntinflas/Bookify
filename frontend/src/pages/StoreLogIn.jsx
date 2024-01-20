@@ -1,7 +1,45 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-const StoreLogIn = () => {
+
+function StoreLogIn() {
+  const [ storesData, setStoresData ] = useState([])
+  const [ loading, setLoading ] = useState(false)
+  const navigate = useNavigate()
+
+  const storeId = null
+  
+  useEffect(() => {
+      setLoading(true);
+      axios
+          .get(`http://localhost:3001/stores`)
+          .then((response) => {
+              console.log('Data from server:', response.data.foundStores);
+              setStoresData(response.data.foundStores);
+              storeId = storesData.store_id
+              console.log(storeId)
+              setLoading(false);
+          })
+          .catch((error) => {
+              console.log('Error fetching data', error);
+              setLoading(false);
+          });
+  }, []);
+
+  
+
+  function verification(){
+    const storeId = storesData.store_id
+    for(let i = 0; i < storesData.length; i++){
+      if(credentials.admin_user === storesData[i].admin_user){
+        if(credentials.password === storesData[i].password){
+          navigate(`store/${storeId}/inventory`)
+        }
+      }
+    }
+  }
+
   const [credentials, setCredentials] = useState({
     admin_user: "",
     password: "",
