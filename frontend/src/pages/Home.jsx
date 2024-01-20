@@ -3,6 +3,7 @@ import SearchBar from '../components/SearchBar';
 import BookDetails from './BookDetails';
 import Navbar from '../components/NavBar';
 
+
 const Home = () => {
   const [searchResult, setSearchResult] = useState(null);
 

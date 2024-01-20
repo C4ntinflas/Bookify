@@ -4,10 +4,10 @@ import { BsArrowLeft } from 'react-icons/bs';
 
 const BackButton = ({ destination = '/books/results' }) => {
   return (
-    <div className='flex items-center'>
+    <div className='p-6 flex items-center'>
       <Link
         to={destination}
-        className='bg-sky-800 text-white px-4 py-2 rounded-md flex items-center hover:bg-sky-700 transition-all duration-300'
+        className='bg-[#36311F] text-white px-4 py-2 rounded-md flex items-center hover:bg-[#36311F] transition-all duration-300'
       >
         <BsArrowLeft className='text-2xl mr-2' />
         <span className='text-lg'>Back</span>

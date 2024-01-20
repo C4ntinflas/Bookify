@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [searchResult, setSearchResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const handleSearch = async () => {
     try {
       setLoading(true);
       const response = await axios.get(`http://localhost:3001/api/search/${searchTerm}`);
-      setSearchResult(response.data);
+      const searchResult = response.data;
+      console.log(response.data); // Add this line to log the response
+      navigate('/books/results', { state: { searchResult } });
     } catch (error) {
       console.error('Error:', error);
       setError('An error occurred while fetching data.');
@@ -19,7 +22,6 @@ const SearchBar = () => {
       setLoading(false);
     }
   };
-
   return (
     <div className="rounded-lg overflow-hidden border border-none border-gray-300 p-4 text-center">
       <input
@@ -53,27 +55,7 @@ const SearchBar = () => {
         fontWeight: 'bold',
         color: 'black',
       }}>{error}</p>}
-
-      {
-        searchResult && (
-          <div>
-            <h3>Search Result</h3>
-            <div>
-              <p><strong>Book ID:</strong> {searchResult.book.book_id}</p>
-              <p><strong>Title:</strong> {searchResult.book.title}</p>
-              <p><strong>Genre:</strong> {searchResult.book.genre}</p>
-              <h4>Store Quantities</h4>
-              {searchResult.store_quantities.map((store, index) => (
-                <div key={index}>
-                  <p><strong>Store ID:</strong> {store.store_id}</p>
-                  <p><strong>Quantity:</strong> {store.quantity}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        )
-      }
-    </div >
+    </div>
   );
 };
 

@@ -24,12 +24,11 @@ const DeleteBook = () => {
   };
 
   return (
-    <div className='p-4'>
+    <div className='p-4 text-white'>
       <BackButton />
-      <h1 className='text-3xl my-4'>Delete Book</h1>
       {loading ? <Spinner /> : ''}
-      <div className='flex flex-col border-2 border-sky-400 rounded-x1 w-[600px] p-4 mx-auto'>
-        <h3 className='text-2xl'>Are You Sure You want to delete this book?</h3>
+      <div className='flex flex-col rounded-md bg-[#49E9C1] rounded-x1 w-[600px] p-4 mx-auto'>
+        <h3 className='text-2xl text-black'>Are You Sure You want to delete this book?</h3>
         <button
           className='p-4 bg-red-600 text-white mt-8 rounded-md hover:bg-red-700 transition-all'
           onClick={handleDeleteBook}

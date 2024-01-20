@@ -1,81 +1,34 @@
-// frontend/src/pages/ShowBooks.js
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-import Spinner from '../components/spinner';
+import React from 'react';
+import { useLocation } from 'react-router-dom';
 import Navbar from '../components/NavBar';
-import { BsInfoCircle } from 'react-icons/bs';
-import { MdOutlineAddBox, MdOutlineDelete } from 'react-icons/md';
-import { AiOutlineEdit } from 'react-icons/ai';
 
 const BookResults = () => {
-  const [books, setBooks] = useState([]);
-  const [loading, setLoading] = useState(false);
+    const { state } = useLocation();
+    console.log('State:', state); // Log state to the console for debugging
+    const searchResult = state && state.searchResult;
 
-  useEffect(() => {
-    setLoading(true);
-    axios
-      .get('http://localhost:3001/books')
-      .then((response) => {
-        console.log('Data received from backend:', response.data.foundBooks);
-        setBooks(response.data.foundBooks);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log('Error fetching data from backend:', error);
-        setLoading(false);
-      });
-  }, []);
-
-  return (
-    <div className='p-4'>
-      <div className='flex justify-between items-center mb-8'>
-        <Navbar />
-        <h1 className='text-3xl my-4 mx-auto'>Books List</h1>
-        <Link to='/books/create'>
-          <MdOutlineAddBox className='text-sky-800 text-4xl' />
-        </Link>
-      </div>
-      {loading ? (
-        <Spinner />
-      ) : (
-        <table className='w-full table-auto'>
-          <thead>
-            <tr className='bg-sky-800 text-white'>
-              <th className='py-2 px-4'>No</th>
-              <th className='py-2 px-4'>Title</th>
-              <th className='py-2 px-4 hidden md:table-cell'>Genre</th>
-              <th className='py-2 px-4 hidden md:table-cell'>Location</th>
-              <th className='py-2 px-4'>Operations</th>
-            </tr>
-          </thead>
-          <tbody>
-            {books.map((book, index) => (
-              <tr key={book.book_id} className='text-center'>
-                <td className='border py-2 px-4'>{index + 1}</td>
-                <td className='border py-2 px-4'>{book.title}</td>
-                <td className='border py-2 px-4 hidden md:table-cell'>{book.genre}</td>
-                <td className='border py-2 px-4 hidden md:table-cell'>{book.location}</td>
-                <td className='border py-2 px-4'>
-                  <div className='flex justify-center gap-x-4'>
-                    <Link to={`/books/details/${book.book_id}`}>
-                      <BsInfoCircle className='text-2xl text-green-800' />
-                    </Link>
-                    <Link to={`/books/edit/${book.book_id}`}>
-                      <AiOutlineEdit className='text-2xl text-yellow-600' />
-                    </Link>
-                    <Link to={`/books/delete/${book.book_id}`}>
-                      <MdOutlineDelete className='text-2xl text-red-600' />
-                    </Link>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
-    </div>
-  );
+    return (
+        <>
+            <Navbar />
+            <div className='p-4'>
+                <div className='flex justify-between items-center mb-8'>
+                    <h1 className='text-3xl my-4 mx-auto text-[#36311F] font-semibold'>Book Results</h1>
+                </div>
+                {searchResult ? (
+                    <div className="bg-gray-100 hover:bg-gray-200">
+                        <p className='border py-2 px-4'><strong>Title:</strong> {searchResult.book.title}</p>
+                        <p className='border py-2 px-4'><strong>Genre:</strong> {searchResult.book.genre}</p>
+                        <p className='border py-2 px-4'><strong>Location:</strong> {searchResult.book.location}</p>
+                        <p className='border py-2 px-4'><strong>Description:</strong> {searchResult.book.description}</p>
+                    </div>
+                ) : (
+                    <div className="rounded-lg overflow-hidden border border-none border-gray-300 p-4 text-center">
+                        <p>No book result found.</p>
+                    </div>
+                )}
+            </div>
+        </>
+    );
 };
 
 export default BookResults;

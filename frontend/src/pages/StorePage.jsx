@@ -8,58 +8,58 @@ import BackButton from "../components/BackButton";
 
 
 function StorePage() {
-    //PULLING DATA THROUGH LINK
-    const location = useLocation()
-    const { from } = location.state
+  //PULLING DATA THROUGH LINK
+  const location = useLocation()
+  const { from } = location.state
 
-    const storeId = from.store_id
-
-
-    //PULLING DATA FROM BACKEND
-    const [ store, setStore ] = useState([])
-    const [ loading, setLoading ] = useState(false)
+  const storeId = from.store_id
 
 
-    useEffect(() => {
-        setLoading(true);
-        axios
-          .get(`http://localhost:3001/books/store/${storeId}`)
-          .then((response) => {
-            console.log('Data received from backend:', response.data);
-            setStore(response.data);
-            setLoading(false);
-          })
-          .catch((error) => {
-            console.log('Error fetching data from backend:', error);
-            setLoading(false);
-          });
-      }, []);
-    
-      return (
-        <div className='p-4'>
-          <BackButton />
-          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"></link>
-          <div>
-            
-          </div>
-          <div className='flex justify-between items-center mb-8'>
-            <h1 className='text-3xl mx-auto'>{}</h1>
-          </div>
-          {loading ? (
-            <Spinner />
-          ) : (
-            <table className='w-full table-auto'>
-              <thead>
-                <tr className='bg-sky-800 text-white'>
-                  <th className='py-2 px-4'>No</th>
-                  <th className='py-2 px-4'>Title</th>
-                  <th className='py-2 px-4 hidden md:table-cell'>Genre</th>
-                  <th className='py-2 px-4 hidden md:table-cell'>Location</th>
-                  <th className='py-2 px-4 hidden md:table-cell'>Quantity</th>
-                  <th className='py-2 px-4'>Operations</th>
-                </tr>
-              </thead>
-              <tbody>
+  //PULLING DATA FROM BACKEND
+  const [store, setStore] = useState([])
+  const [loading, setLoading] = useState(false)
+
+
+  useEffect(() => {
+    setLoading(true);
+    axios
+      .get(`http://localhost:3001/books/store/${storeId}`)
+      .then((response) => {
+        console.log('Data received from backend:', response.data);
+        setStore(response.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log('Error fetching data from backend:', error);
+        setLoading(false);
+      });
+  }, []);
+
+  return (
+    <div className='p-4'>
+      <BackButton />
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"></link>
+      <div>
+
+      </div>
+      <div className='flex justify-between items-center mb-8'>
+        <h1 className='text-3xl mx-auto'>{ }</h1>
+      </div>
+      {loading ? (
+        <Spinner />
+      ) : (
+        <table className='w-full table-auto'>
+          <thead>
+            <tr className='bg-sky-800 text-white'>
+              <th className='py-2 px-4'>No</th>
+              <th className='py-2 px-4'>Title</th>
+              <th className='py-2 px-4 hidden md:table-cell'>Genre</th>
+              <th className='py-2 px-4 hidden md:table-cell'>Location</th>
+              <th className='py-2 px-4 hidden md:table-cell'>Quantity</th>
+              <th className='py-2 px-4'>Operations</th>
+            </tr>
+          </thead>
+          <tbody>
             {store.map((store, index) => (
               <tr key={store.book_id} className='text-center'>
                 <td className='border py-2 px-4'>{index + 1}</td>

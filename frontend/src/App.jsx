@@ -10,6 +10,7 @@ import Stores from './pages/Stores';
 import StoreLogIn from './pages/StoreLogIn';
 import StorePage from './pages/StorePage';
 import PurchasePage from './pages/PurchasePage';
+import StoreInvent from './pages/StoreInvent';
 
 const App = () => {
       return (
@@ -21,9 +22,10 @@ const App = () => {
                   <Route path='/books/edit/:id' element={<EditBooks />} />
                   <Route path='/books/delete/:id' element={<DeleteBook />} />
                   <Route path='/stores' element={<Stores />} />
-                  <Route path='/login' element={<StoreLogIn />} />
+                  <Route path='/store/login' element={<StoreLogIn />} />
                   <Route path='/stores/:id' element={<StorePage />} />
                   <Route path='/stores/:id/purchase' element={<PurchasePage />} />
+                  <Route path='/store/:id/inventory' element={<StoreInvent />} />
             </Routes>
       );
 };
