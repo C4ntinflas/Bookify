@@ -8,7 +8,7 @@ function StoreLogIn() {
   const [ loading, setLoading ] = useState(false)
   const navigate = useNavigate()
 
-  const storeId = null
+  let storeId = null
   
   useEffect(() => {
       setLoading(true);
