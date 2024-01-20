@@ -21,6 +21,7 @@ const DeleteBook = () => {
         setLoading(false);
         console.log(error);
       });
+      history.back()
   };
 
   return (

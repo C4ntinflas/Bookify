@@ -11,6 +11,8 @@ import StoreLogIn from './pages/StoreLogIn';
 import StorePage from './pages/StorePage';
 import PurchasePage from './pages/PurchasePage';
 import StoreInvent from './pages/StoreInvent';
+import UserLogin from './pages/userLogin';
+import CreateStore from './pages/CreateStore';
 
 const App = () => {
   return (
@@ -26,6 +28,8 @@ const App = () => {
       <Route path='/stores/:id' element={<StorePage />} />
       <Route path='/stores/:id/:id' element={<PurchasePage />} />
       <Route path='login/store/:id/inventory' element={<StoreInvent />} />
+      <Route path='user/login' element={<UserLogin />} />
+      <Route path='login/createStore' element={<CreateStore />} />
     </Routes>
   );
 };
