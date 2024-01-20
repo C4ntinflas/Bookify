@@ -8,16 +8,16 @@ import BackButton from "../components/BackButton";
 
 
 function StorePage() {
-    //PULLING DATA THROUGH LINK
-    const location = useLocation()
-    const { from } = location.state
+  //PULLING DATA THROUGH LINK
+  const location = useLocation()
+  const { from } = location.state
 
-    const storeId = from.store_id
+  const storeId = from.store_id
 
 
-    //PULLING DATA FROM BACKEND
-    const [ store, setStore ] = useState([])
-    const [ loading, setLoading ] = useState(false)
+  //PULLING DATA FROM BACKEND
+  const [store, setStore] = useState([])
+  const [loading, setLoading] = useState(false)
 
 
     useEffect(() => {

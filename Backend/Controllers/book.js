@@ -55,6 +55,7 @@ books.post("/", async (req, res) => {
 books.get("/new", (req, res) => {
   res.render("books/new");
 });
+
 // Route to view details of a specific book
 books.get("/:id", async (req, res) => {
   try {
@@ -93,7 +94,8 @@ books.put("/:id", async (req, res) => {
     console.error("Error:", error);
     res.status(500).json({ message: "Internal Server Error" });
   }
-});
+})
+
 // Route to delete a specific book
 books.delete("/:id", async (req, res) => {
   try {
