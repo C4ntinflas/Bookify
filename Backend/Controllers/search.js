@@ -19,11 +19,6 @@ search.get("/search/:title", async (req, res) => {
           attributes: ["store_id", "quantity"],
           raw: true, // Use raw: true to avoid aliasing
         },
-        {
-          model: UserInventory,
-          attributes: ["user_id", "quantity"],
-          raw: true, // Use raw: true to avoid aliasing
-        },
       ],
       attributes: [
         "book_id",
@@ -44,30 +39,24 @@ search.get("/search/:title", async (req, res) => {
 
     console.log(book);
 
-    const result = {
-      book: {
-        book_id: book.book_id,
-        title: book.title,
-        genre: book.genre,
-        location: book.location,
-        description: book.description,
-        total_quantity: book.total_quantity,
-        quantity: book.quantity,
-        store_id: book.store_id,
-      },
-      store_quantities: [
-        {
-          store_id: book["StoresBooks.store_id"],
-          quantity: book["StoresBooks.quantity"],
-        },
-      ],
-      user_quantities: [
-        {
-          user_id: book["UserInventories.user_id"],
-          quantity: book["UserInventories.quantity"],
-        },
-      ],
-    };
+   const result = {
+  book: {
+    book_id: book.book_id,
+    title: book.title,
+    genre: book.genre,
+    location: book.location,
+    description: book.description,
+    total_quantity: book.total_quantity,
+    quantity: book.quantity,
+    store_id: book.store_id,
+  },
+  store_quantities: [
+    {
+      store_id: book.store_id,
+      quantity: book.quantity,
+    },
+  ]
+};
 
     res.json(result);
   } catch (error) {

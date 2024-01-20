@@ -3,6 +3,7 @@ const express = require("express");
 const axios = require("axios");
 const cors = require("cors");
 
+
 // CONFIGURATION / MIDDLEWARE
 require("dotenv").config();
 
@@ -18,15 +19,21 @@ app.get("/", (req, res) => {
   });
 });
 
-//CONTROLLERS
+//CONTROLLERS / ROUTES
 const storesController = require("./Controllers/store_controller");
-app.use("/stores", storesController);
+app.use('/stores', storesController);
 
 const booksController = require('./Controllers/book')
 app.use('/books', booksController);
 
 const searchController = require("./Controllers/search");
-app.use("/api", searchController);
+app.use('/api', searchController);
+
+const authRoutes = require('./Controllers/auth');
+app.use('/admin', authRoutes);
+
+
+
 
 // Backend Endpoint GET Request
 const backendEndpoint = "http://localhost:5173/";
@@ -50,7 +57,6 @@ app.get("/fetchData", cors(), (req, res) => {
       });
     });
 });
-
 
 // LISTEN
 app.listen(process.env.PORT, () => {

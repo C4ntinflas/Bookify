@@ -27,8 +27,7 @@ const EditBooks = () => {
       setLoading(true);
       axios.get(`http://localhost:3001/books/${id}`)
         .then(response => {
-          const book = response.data;
-          console.log('Book Data:', book);
+          const book = response.data.book;
           setTitle(book.title);
           setGenre(book.genre);
           setLocation(book.location);
@@ -83,7 +82,7 @@ const EditBooks = () => {
   return (
     <div className='p-4'>
       <BackButton />
-      <h1 className='text-3xl my-4'>Create Book</h1>
+      <h1 className='text-3xl my-4'>Edit Book</h1>
       {loading ? <Spinner /> : ''}
       <div className='flex flex-col border-2 border-sky-400 rounded-x1 w-[600px] p-4 mx-auto'>
         <div className='m-4'>
@@ -138,7 +137,7 @@ const EditBooks = () => {
           </select>
         </div>
         <div className='m-4'>
-          <label className='text-xl mr-4 text-grey-500'>Qunatity</label>
+          <label className='text-xl mr-4 text-grey-500'>Quantity</label>
           <input
             type='text'
             value={quantity}
@@ -147,7 +146,7 @@ const EditBooks = () => {
           />
         </div>
         <div className='m-4'>
-          <label className='text-xl mr-4 text-grey-500'>Total Qunatity</label>
+          <label className='text-xl mr-4 text-grey-500'>Total Quantity</label>
           <input
             type='text'
             value={totalQuantity}

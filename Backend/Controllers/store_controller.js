@@ -1,27 +1,33 @@
 const book_stores = require('express').Router()
 const db = require('../models')
 const { BookStore } = db
+const { Op } = require('sequelize');
 
+
+//INDEX
 book_stores.get('/', async (req, res) => {
     try{
         const foundStores = await BookStore.findAll()
-        res.status(200).json({foundStores})
+        console.log(foundStores)
+        res.status(200).json({ foundStores })
     } catch (error) {
         res.status(500).json(error)
     }
 })
 
-//SHOW
+/////SHOW//////
 book_stores.get('/:id', async (req, res) => {
     try {
         const foundStores = await BookStore.findOne({
-            where: { store_id: req.params.id }
+            where: { store_id: req.params.id },
+            include: [store]
         })
         res.status(200).json(foundStores)
     } catch (error) {
         res.status(500).json(error)
     }
 })
+
 
 //CREATE
 book_stores.post('/', async (req, res) => {
