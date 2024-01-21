@@ -78,7 +78,7 @@ function StorePage() {
                   <div className='flex justify-center gap-x-4'>
                     <Link to={`${store.book_id}`} state={{ from: store }}>
                       <div className='p-6 flex items-center'>
-                        <button type="button" onClick={BackButton}
+                        <button type="button"
                           className='bg-[#49E9C1] text-white px-4 py-2 rounded-md flex items-center hover:bg-[#252422] transition-all duration-300 text-lg text-2xl mr-2'
                         >Book Details</button>
                       </div>

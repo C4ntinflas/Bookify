@@ -68,6 +68,10 @@ const bookImg = [{
 
 
 
+const BackButton = () => {
+    history.back()
+  };
+
 function PurchasePage() {
     const location = useLocation()
     const { from } = location.state
@@ -92,18 +96,12 @@ function PurchasePage() {
                 .catch(error => {
                     console.error('Error updating quantity:', error);
                     // Handle error and provide user feedback if necessary
-                }),
-            history.back()
+                })
         } else {
             alert("This book is currently sold out");
-        }       
+        }    
+        history.back()   
     }
-
-    
-
-      const BackButton = () => {
-        history.back()
-      };
 
     return (
         
