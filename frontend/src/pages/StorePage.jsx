@@ -5,9 +5,11 @@ import axios from 'axios'
 import Spinner from '../components/spinner'
 import { Link } from "react-router-dom";
 import BackButton from "../components/BackButton";
-
+import Navbar from "../components/NavBar";
+import { BsArrowLeft } from 'react-icons/bs';
 
 function StorePage() {
+
   //PULLING DATA THROUGH LINK
   const location = useLocation()
   const { from } = location.state
@@ -35,12 +37,17 @@ function StorePage() {
       });
   }, []);
 
-  return (
-    <div className='p-4'>
-      <BackButton />
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossOrigin="anonymous"></link>
-      <div>
+  const BackButton = () => {
+    history.back()
+  };
 
+  return (
+    <div>
+      <Navbar />
+      <div className='p-6 flex items-center'>
+        <button type="button" onClick={BackButton}
+          className='bg-[#36311F] text-white px-4 py-2 rounded-md flex items-center hover:bg-[#36311F] transition-all duration-300 text-lg text-2xl mr-2'
+        ><BsArrowLeft className='text-2xl mr-2' />Back</button>
       </div>
       <div className='flex justify-between items-center mb-8'>
         <h1 className='text-3xl mx-auto'>{ }</h1>
@@ -70,15 +77,16 @@ function StorePage() {
                 <td className='border py-2 px-4'>
                   <div className='flex justify-center gap-x-4'>
                     <Link to={`${store.book_id}`} state={{ from: store }}>
-                      <button type="button" className="btn btn-primary">Purchase</button>
+                      <div className='p-6 flex items-center'>
+                        <button type="button" onClick={BackButton}
+                          className='bg-[#49E9C1] text-white px-4 py-2 rounded-md flex items-center hover:bg-[#252422] transition-all duration-300 text-lg text-2xl mr-2'
+                        >Book Details</button>
+                      </div>
                     </Link>
                   </div>
                 </td>
               </tr>
             ))}
-            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossOrigin="anonymous"></script>
-            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossOrigin="anonymous"></script>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossOrigin="anonymous"></script>
           </tbody>
         </table>
       )}

@@ -13,7 +13,7 @@ const SearchBar = () => {
       setLoading(true);
       const response = await axios.get(`http://localhost:3001/api/search/${searchTerm}`);
       const searchResult = response.data;
-      console.log(response.data); // Add this line to log the response
+      console.log(response.data);
       navigate('/books/results', { state: { searchResult } });
     } catch (error) {
       console.error('Error:', error);

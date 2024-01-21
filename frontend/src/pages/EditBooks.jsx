@@ -19,7 +19,7 @@ const EditBooks = () => {
     { store_id: 3, name: 'Classic Books Emporium' },
   ]);
 
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const { id } = useParams();
 
   useEffect(() => {
@@ -71,12 +71,13 @@ const EditBooks = () => {
       .then(response => {
         console.log('Book edited successfully:', response.data);
         setLoading(false);
-        navigate('/books/results');
+        //navigate('/books/results');
       })
       .catch(error => {
         console.error('Error editing book:', error);
         setLoading(false);
       });
+      history.back()
   };
 
   return (
@@ -145,7 +146,7 @@ const EditBooks = () => {
             className='border-2 border-grey-500 px-4 py-2 w-full'
           />
         </div>
-        <div className='m-4'>
+        {/* <div className='m-4'>
           <label className='text-xl mr-4 text-grey-500'>Total Quantity</label>
           <input
             type='text'
@@ -153,7 +154,7 @@ const EditBooks = () => {
             onChange={(e) => setTotalQuantity(e.target.value)}
             className='border-2 border-grey-500 px-4 py-2 w-full'
           />
-        </div>
+        </div> */}
         <button className='p-2 bg-sky-300 m-8' onClick={handleEditBook}>
           Save
         </button>

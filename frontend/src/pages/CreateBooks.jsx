@@ -19,7 +19,7 @@ const CreateBooks = () => {
     { store_id: 3, name: 'Classic Books Emporium' },
   ]);
 
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const { id } = useParams();
 
 
@@ -79,12 +79,13 @@ const CreateBooks = () => {
           .then(response => {
             console.log('Book saved successfully:', response.data);
             setLoading(false);
-            navigate('/books/results');
+            //navigate('/books/results');
           })
           .catch(error => {
             console.error('Error saving book:', error);
             setLoading(false);
           });
+          history.back()
       })
       .catch(error => {
         console.error('Error fetching store data:', error);
