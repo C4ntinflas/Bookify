@@ -1,32 +1,32 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Link, useLocation } from 'react-router-dom';
-import Spinner from '../components/spinner';
-import Navbar from '../components/NavBar';
-import { BsInfoCircle } from 'react-icons/bs';
-import { MdOutlineAddBox, MdOutlineDelete } from 'react-icons/md';
-import { AiOutlineEdit } from 'react-icons/ai';
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
+import { Link, useLocation } from 'react-router-dom'
+import Spinner from '../components/spinner'
+import Navbar from '../components/Navbar'
+import { BsInfoCircle } from 'react-icons/bs'
+import { MdOutlineAddBox, MdOutlineDelete } from 'react-icons/md'
+import { AiOutlineEdit } from 'react-icons/ai'
 
 const StoreInvent = () => {
-  const location = useLocation();
-  const storeId = location.state?.store_id;
+  const location = useLocation()
+  const storeId = location.state?.store_id
 
-  const [store, setStore] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [store, setStore] = useState([])
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     if (storeId) {
-      setLoading(true);
+      setLoading(true)
       axios
         .get(`http://localhost:3001/books/store/${storeId}`)
         .then((response) => {
-          console.log('Data received from backend:', response.data);
-          setStore(response.data);
-          setLoading(false);
+          console.log('Data received from backend:', response.data)
+          setStore(response.data)
+          setLoading(false)
         })
         .catch((error) => {
-          console.log('Error fetching data from backend:', error);
-          setLoading(false);
+          console.log('Error fetching data from backend:', error)
+          setLoading(false)
         });
     }
   }, [storeId]);

@@ -1,12 +1,11 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
+import React from "react"
+import { useLocation } from "react-router-dom"
+import { useState, useEffect } from "react"
 import axios from 'axios'
 import Spinner from '../components/spinner'
-import { Link } from "react-router-dom";
-import BackButton from "../components/BackButton";
-import Navbar from "../components/NavBar";
-import { BsArrowLeft } from 'react-icons/bs';
+import { Link } from "react-router-dom"
+import Navbar from "../components/Navbar"
+import { BsArrowLeft } from 'react-icons/bs'
 
 function StorePage() {
 
@@ -78,7 +77,7 @@ function StorePage() {
                   <div className='flex justify-center gap-x-4'>
                     <Link to={`${store.book_id}`} state={{ from: store }}>
                       <div className='p-6 flex items-center'>
-                        <button type="button" onClick={BackButton}
+                        <button type="button"
                           className='bg-[#49E9C1] text-white px-4 py-2 rounded-md flex items-center hover:bg-[#252422] transition-all duration-300 text-lg text-2xl mr-2'
                         >Book Details</button>
                       </div>
