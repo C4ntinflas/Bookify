@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import axios from 'axios';
-import Spinner from '../components/spinner';
-import BackButton from '../components/BackButton';
-import { Link } from "react-router-dom";
-import Navbar from "../components/NavBar";
-import { BsArrowLeft } from 'react-icons/bs';
+import React, { useState, useEffect } from "react"
+import axios from 'axios'
+import Spinner from '../components/spinner'
+import BackButton from '../components/BackButton'
+import { Link } from "react-router-dom"
+import Navbar from "../components/Navbar"
+import { BsArrowLeft } from 'react-icons/bs'
 
 let newImg = null
 let myStore = null
@@ -40,16 +40,16 @@ function Stores() {
     setImg(storeImg, myStore)
 
     useEffect(() => {
-        setLoading(true);
+        setLoading(true)
         axios
             .get(`http://localhost:3001/stores`)
             .then((response) => {
-                console.log('Data from server:', response.data.foundStores);
-                setStoresData(response.data.foundStores);
-                setLoading(false);
+                console.log('Data from server:', response.data.foundStores)
+                setStoresData(response.data.foundStores)
+                setLoading(false)
             })
             .catch((error) => {
-                console.log('Error fetching data', error);
+                console.log('Error fetching data', error)
                 setLoading(false);
             });
     }, []);
@@ -101,4 +101,4 @@ function Stores() {
     );
 }
 
-export default Stores;
+export default Stores

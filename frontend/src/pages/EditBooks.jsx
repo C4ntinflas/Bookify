@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import BackButton from '../components/BackButton';
-import Spinner from '../components/spinner';
-import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react'
+import Spinner from '../components/spinner'
+import axios from 'axios'
+import { useNavigate, useParams } from 'react-router-dom'
+import Navbar from '../components/Navbar'
+import { BsArrowLeft } from 'react-icons/bs'
 
 const EditBooks = () => {
   const [title, setTitle] = useState('');
@@ -80,84 +81,95 @@ const EditBooks = () => {
       history.back()
   };
 
+  const BackButton = () => {
+    history.back()
+  };
+
   return (
-    <div className='p-4'>
-      <BackButton />
-      <h1 className='text-3xl my-4'>Edit Book</h1>
-      {loading ? <Spinner /> : ''}
-      <div className='flex flex-col border-2 border-sky-400 rounded-x1 w-[600px] p-4 mx-auto'>
-        <div className='m-4'>
-          <label className='text-xl mr-4 text-grey-500'>Title</label>
-          <input
-            type='text'
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className='border-2 border-grey-500 px-4 py-2 w-full'
-          />
+    <div>
+      <Navbar />
+      <div className='p-4'>
+        <div className='p-6 flex items-center'>
+          <button type="button" onClick={BackButton}
+            className='bg-[#36311F] text-white px-4 py-2 rounded-md flex items-center hover:bg-[#36311F] transition-all duration-300 text-lg text-2xl mr-2'
+            ><BsArrowLeft className='text-2xl mr-2' />Back</button>
         </div>
-        <div className='m-4'>
-          <label className='text-xl mr-4 text-grey-500'>Genre</label>
-          <input
-            type='text'
-            value={genre}
-            onChange={(e) => setGenre(e.target.value)}
-            className='border-2 border-grey-500 px-4 py-2 w-full'
-          />
+        <h1 className='text-center text-3xl my-4'>Edit Book</h1>
+        {loading ? <Spinner /> : ''}
+        <div className='flex flex-col border-2 border-sky-400 rounded-x1 w-[600px] p-4 mx-auto'>
+          <div className='m-4'>
+            <label className='text-xl mr-4 text-grey-500'>Title</label>
+            <input
+              type='text'
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className='border-2 border-grey-500 px-4 py-2 w-full'
+            />
+          </div>
+          <div className='m-4'>
+            <label className='text-xl mr-4 text-grey-500'>Genre</label>
+            <input
+              type='text'
+              value={genre}
+              onChange={(e) => setGenre(e.target.value)}
+              className='border-2 border-grey-500 px-4 py-2 w-full'
+            />
+          </div>
+          <div className='m-4'>
+            <label className='text-xl mr-4 text-grey-500'>Description</label>
+            <input
+              type='text'
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              className='border-2 border-grey-500 px-4 py-2 w-full'
+            />
+          </div>
+          <div className='m-4'>
+            <label className='text-xl mr-4 text-grey-500'>Location</label>
+            <input
+              type='text'
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              className='border-2 border-grey-500 px-4 py-2 w-full'
+            />
+          </div>
+          <div className='m-4'>
+            <label className='text-xl mr-4 text-grey-500'>Store</label>
+            <select
+              value={storeName}
+              onChange={(e) => setStoreName(e.target.value)}
+              className='border-2 border-grey-500 px-4 py-2 w-full'
+            >
+              <option value=''>Select a store</option>
+              {stores.map((store) => (
+                <option key={store.store_id} value={store.name}>
+                  {store.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className='m-4'>
+            <label className='text-xl mr-4 text-grey-500'>Quantity</label>
+            <input
+              type='text'
+              value={quantity}
+              onChange={(e) => setQuantity(e.target.value)}
+              className='border-2 border-grey-500 px-4 py-2 w-full'
+            />
+          </div>
+          {/* <div className='m-4'>
+            <label className='text-xl mr-4 text-grey-500'>Total Quantity</label>
+            <input
+              type='text'
+              value={totalQuantity}
+              onChange={(e) => setTotalQuantity(e.target.value)}
+              className='border-2 border-grey-500 px-4 py-2 w-full'
+            />
+          </div> */}
+          <button className='p-2 bg-sky-300 m-8' onClick={handleEditBook}>
+            Save
+          </button>
         </div>
-        <div className='m-4'>
-          <label className='text-xl mr-4 text-grey-500'>Description</label>
-          <input
-            type='text'
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            className='border-2 border-grey-500 px-4 py-2 w-full'
-          />
-        </div>
-        <div className='m-4'>
-          <label className='text-xl mr-4 text-grey-500'>Location</label>
-          <input
-            type='text'
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            className='border-2 border-grey-500 px-4 py-2 w-full'
-          />
-        </div>
-        <div className='m-4'>
-          <label className='text-xl mr-4 text-grey-500'>Store</label>
-          <select
-            value={storeName}
-            onChange={(e) => setStoreName(e.target.value)}
-            className='border-2 border-grey-500 px-4 py-2 w-full'
-          >
-            <option value=''>Select a store</option>
-            {stores.map((store) => (
-              <option key={store.store_id} value={store.name}>
-                {store.name}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className='m-4'>
-          <label className='text-xl mr-4 text-grey-500'>Quantity</label>
-          <input
-            type='text'
-            value={quantity}
-            onChange={(e) => setQuantity(e.target.value)}
-            className='border-2 border-grey-500 px-4 py-2 w-full'
-          />
-        </div>
-        {/* <div className='m-4'>
-          <label className='text-xl mr-4 text-grey-500'>Total Quantity</label>
-          <input
-            type='text'
-            value={totalQuantity}
-            onChange={(e) => setTotalQuantity(e.target.value)}
-            className='border-2 border-grey-500 px-4 py-2 w-full'
-          />
-        </div> */}
-        <button className='p-2 bg-sky-300 m-8' onClick={handleEditBook}>
-          Save
-        </button>
       </div>
     </div>
   );

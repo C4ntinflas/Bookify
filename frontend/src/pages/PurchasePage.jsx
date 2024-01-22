@@ -1,7 +1,7 @@
 import React from "react"
 import { useLocation } from "react-router-dom";
 import axios from 'axios'
-import Navbar from "../components/NavBar";
+import Navbar from "../components/Navbar";
 import { BsArrowLeft } from 'react-icons/bs';
 
 
@@ -86,17 +86,17 @@ function PurchasePage() {
             axios.put(`http://localhost:3001/books/book/${book.book_id}`, book)
                 .then(response => {
                     console.log('Quantity was successfully updated', response.data);
-                    
+                    history.back()
                     
                 })
                 .catch(error => {
                     console.error('Error updating quantity:', error);
                     // Handle error and provide user feedback if necessary
-                }),
-            history.back()
+                })
         } else {
             alert("This book is currently sold out");
-        }       
+        } 
+        history.back()    
     }
 
     
