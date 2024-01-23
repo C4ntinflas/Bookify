@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { BsArrowLeft } from 'react-icons/bs';
-import Navbar from "../components/NavBar";
+import Navbar from "./components/NavBar";
 
 
 function StoreLogIn() {
@@ -64,9 +64,9 @@ function StoreLogIn() {
     <div className="bg-[#D2CBB1]">
       <Navbar />
       <div className="bg-[#D2CBB1]">
-          <button type="button" onClick={BackButton} 
-                        className='mt-3 mr-3 bg-[#36311F] text-white px-4 py-2 rounded-md flex items-center hover:bg-[#36311F] transition-all duration-300 text-lg text-2xl'
-                        ><BsArrowLeft className='text-2xl mr-2' />Back</button>
+        <button type="button" onClick={BackButton}
+          className='mt-3 mr-3 bg-[#36311F] text-white px-4 py-2 rounded-md flex items-center hover:bg-[#36311F] transition-all duration-300 text-lg text-2xl'
+        ><BsArrowLeft className='text-2xl mr-2' />Back</button>
 
         <div className="flex items-center justify-center h-screen bg-[#D2CBB1] text-black">
           <div className="bg-[#DCAB6B] p-8 rounded-lg shadow-md">
@@ -80,7 +80,7 @@ function StoreLogIn() {
                   name="admin_user"
                   value={credentials.admin_user}
                   onChange={handleInputChange}
-                  />
+                />
               </div>
               <div className="mb-4">
                 <label className="block text-sm font-semibold mb-2">Password:</label>
@@ -90,14 +90,14 @@ function StoreLogIn() {
                   name="password"
                   value={credentials.password}
                   onChange={handleInputChange}
-                  />
+                />
               </div>
               <a className="mb-4" href="http://localhost:5173/login/createStore">Create Store</a>
               <button
                 className="mt-3 w-full bg-black text-white p-2 rounded hover:bg-[#49E9C1] transition"
                 type="button"
                 onClick={handleLogin}
-                >
+              >
                 Login
               </button>
             </form>
