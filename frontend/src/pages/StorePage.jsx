@@ -24,7 +24,7 @@ function StorePage() {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`http://localhost:3001/books/store/${storeId}`)
+      .get(`https://bookify-backend.onrender.com/books/store/${storeId}`)
       .then((response) => {
         console.log('Data received from backend:', response.data);
         setStore(response.data);

@@ -42,7 +42,7 @@ function Stores() {
     useEffect(() => {
         setLoading(true)
         axios
-            .get(`http://localhost:3001/stores`)
+            .get(`https://bookify-backend.onrender.com/stores`)
             .then((response) => {
                 console.log('Data from server:', response.data.foundStores)
                 setStoresData(response.data.foundStores)
